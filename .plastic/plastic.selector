@@ -1,0 +1,4 @@
+repository "FantasyCoin/FantasyCoin@5772481934160@cloud"
+  path "/"
+    br "/main"
+    co "/main"
