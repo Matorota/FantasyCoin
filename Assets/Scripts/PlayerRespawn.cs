@@ -2,18 +2,27 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.InputSystem; 
+using UnityEngine.InputSystem;
 
 public class PlayerRespawn : MonoBehaviour
 {
-    [Tooltip("The Y position the player must fall below to restart the level.")]
     public float threshold = -3f;
 
     void Update()
     {
-        if (Keyboard.current != null && Keyboard.current.rKey.wasPressedThisFrame)
+        if (Keyboard.current != null)
         {
-            ResetScene();
+            if (Keyboard.current.rKey.wasPressedThisFrame)
+            {
+                ResetScene();
+            }
+
+            if (Keyboard.current.escapeKey.wasPressedThisFrame)
+            {
+                Time.timeScale = 1f;
+
+                SceneManager.LoadScene(1);
+            }
         }
     }
 
@@ -27,6 +36,8 @@ public class PlayerRespawn : MonoBehaviour
 
     private void ResetScene()
     {
+        Time.timeScale = 1f;
+
         Scene currentScene = SceneManager.GetActiveScene();
         SceneManager.LoadScene(currentScene.buildIndex);
     }
