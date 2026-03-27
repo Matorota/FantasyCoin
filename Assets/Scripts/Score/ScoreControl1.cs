@@ -1,13 +1,15 @@
-using UnityEngine;
 using TMPro;
+using UnityEngine;
 
 public class ScoreControl : MonoBehaviour
 {
     [SerializeField] GameObject scoreBox;
-    [SerializeField] GameEnd gameEnd;
+
+    [SerializeField] WinPopUp winPopUpDialog;
 
     public static int coinsLeft = 0;
     private static int totalCoins = 0;
+    private bool gameEnded = false;
 
     void Start()
     {
@@ -15,20 +17,25 @@ public class ScoreControl : MonoBehaviour
         coinsLeft = totalCoins;
     }
 
-    bool gameEnded = false;
-
     void Update()
     {
         int coinsCollected = totalCoins - coinsLeft;
 
-        // \n creates a new line under the score
         scoreBox.GetComponent<TMP_Text>().text =
-            "Score: " + coinsCollected + " / " + totalCoins + "\nPress R to restart game";
+            "Score: " + coinsCollected + " / " + totalCoins;
 
         if (coinsLeft <= 0 && !gameEnded)
         {
             gameEnded = true;
-            gameEnd.EndGame();
+
+            if (winPopUpDialog != null)
+            {
+                winPopUpDialog.LevelComplete();
+            }
+            else
+            {
+                UnityEngine.Debug.LogWarning("Remember to assign the WinPopUp script in the Inspector!");
+            }
         }
     }
 }

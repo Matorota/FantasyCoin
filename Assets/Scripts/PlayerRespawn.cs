@@ -19,14 +19,12 @@ public class PlayerRespawn : MonoBehaviour
 
     void FixedUpdate()
     {
-        // Check if the player has fallen below the threshold
         if (transform.position.y < threshold)
         {
             ResetScene();
         }
     }
 
-    // A helper method to easily reload the scene from anywhere
     private void ResetScene()
     {
         Scene currentScene = SceneManager.GetActiveScene();

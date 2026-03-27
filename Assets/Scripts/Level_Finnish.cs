@@ -7,12 +7,6 @@ public class GameEnd : MonoBehaviour
     {
         Debug.Log("Game Ended!");
 
-        // Stop time (freeze game)
         Time.timeScale = 0f;
-
-        // You can also:
-        // Show win UI
-        // Load next level
-        // Play animation
     }
 }
