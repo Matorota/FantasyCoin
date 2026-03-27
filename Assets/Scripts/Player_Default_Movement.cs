@@ -89,4 +89,11 @@ public class PlayerControls : MonoBehaviour
         playerVelocity.y += gravityValue * Time.deltaTime;
         controller.Move(playerVelocity * Time.deltaTime);
     }
+
+    public void ResetVelocity()
+    {
+        playerVelocity = Vector3.zero;
+        currentMove = Vector3.zero;
+        moveVelocity = Vector3.zero;
+    }
 }
