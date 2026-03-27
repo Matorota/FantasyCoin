@@ -2,8 +2,7 @@ using UnityEngine;
 
 public class CoinControl : MonoBehaviour
 {
-    [SerializeField] int  rotationSpeed = 2;
-
+    [SerializeField] int rotationSpeed = 2;
 
     void Update()
     {
@@ -12,7 +11,7 @@ public class CoinControl : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
+        ScoreControl.coinsLeft -= 1;
         Destroy(gameObject);
     }
-
 }
