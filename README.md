@@ -2,7 +2,7 @@
 
 A simple 3D isometric platforming game made in Unity. Your goal is to collect all the coins on the map before the time runs out. Be careful not to fall off the edge!
 
-# Movement 
+## Movement 
 You can switch between the two movement systems in the Unity Editor by selecting the necessary script.
  - Tile movement ( default )
  - Non tile movement system
