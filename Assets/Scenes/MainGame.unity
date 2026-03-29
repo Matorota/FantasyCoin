@@ -6820,6 +6820,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   threshold: -3
+  fallLoseUI: {fileID: 1701626623}
 --- !u!1001 &1198104330
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8338,7 +8339,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: TIME UP!
+  m_text: 'TIMES UP!
+
+    Press R to restart'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -9178,7 +9181,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1701626624
 RectTransform:
   m_ObjectHideFlags: 0
@@ -10114,7 +10117,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "YOU HAVE ENTERET UNDOR WORLD \nYOU DEAD"
+  m_text: 'YOU HAVE ENTERED THE UNDER WORLD YOU ARE DEAD
+
+
+    Press R to restart'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
