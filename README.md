@@ -8,7 +8,7 @@ A simple 3D isometric platforming game made in Unity. Your goal is to collect al
 - If you fall off the map, you die.
 
 ## Controls
-- **W, A, S, D / Arrows:** Move around
+- **W, A, S, D :** Move around
 - **Spacebar:** Jump
 - **R:** Restart the level
 - **Esc:** Return to the Main Menu
