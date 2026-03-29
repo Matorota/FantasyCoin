@@ -18,7 +18,6 @@ public class PlayerTileMovement : MonoBehaviour
     private Vector3 targetPosXZ;
     private float verticalVelocity;
 
-    // Naudojamas pamatyti, ar tiesiogiai po jumis yra atrama
     private bool isStrictlyGrounded = true;
 
     private readonly Vector3 isoUpRight = new Vector3(1, 0, 0);
@@ -40,7 +39,6 @@ public class PlayerTileMovement : MonoBehaviour
 
     private void HandleJumpAndGravity()
     {
-        // Tikriname, ar po pat žaidėjo centru YRA žemė (ne ore)
         isStrictlyGrounded = Physics.SphereCast(transform.position + Vector3.up * 0.1f, 0.15f, Vector3.down, out _, 0.35f, ~0, QueryTriggerInteraction.Ignore);
 
         if (controller.isGrounded && verticalVelocity < 0)
@@ -49,13 +47,11 @@ public class PlayerTileMovement : MonoBehaviour
         }
 
         var keyboard = Keyboard.current;
-        // Leidžiame pašokti tvirtai stovint.
         if (keyboard != null && keyboard.spaceKey.wasPressedThisFrame && isStrictlyGrounded)
         {
             verticalVelocity = Mathf.Sqrt(jumpHeight * -2f * gravityValue);
         }
 
-        // Taikome gravitaciją
         verticalVelocity += gravityValue * Time.deltaTime;
     }
 
@@ -63,13 +59,11 @@ public class PlayerTileMovement : MonoBehaviour
     {
         Vector3 currentPosXZ = new Vector3(transform.position.x, 0, transform.position.z);
 
-        // Apsaugine sistema po ilgo kristimo ar teleportacijos
         if (Vector3.Distance(currentPosXZ, targetPosXZ) > tileSize * 2f)
         {
             targetPosXZ = currentPosXZ;
         }
 
-        // Ar stovime/slystame lygiai ant tikslinio bloko? (arba pakibę tobulai oro centre virš tikslo!)
         bool isAtTileCenter = Vector3.Distance(currentPosXZ, targetPosXZ) < 0.05f;
 
         if (isAtTileCenter)
@@ -77,7 +71,6 @@ public class PlayerTileMovement : MonoBehaviour
             var keyboard = Keyboard.current;
             if (keyboard != null)
             {
-                // Jautrumas judėjimui priimamas iš visų mygtukų.
                 Vector3 moveDirection = Vector3.zero;
 
                 if (keyboard.wKey.isPressed) moveDirection = isoUpLeft;
@@ -91,14 +84,10 @@ public class PlayerTileMovement : MonoBehaviour
 
                     float radius = controller.radius - 0.05f;
 
-                    // Padarome spindulį patikrinimui (Capsule Cast) trumpesnį – taip šuolyje būdami aukščiau 
-                    // galėsite patikrinti, ar jūsų KOJOS nekliudo aukštesnių blokų kraštų.
                     Vector3 p1 = transform.position + controller.center + Vector3.up * (controller.height / 2f - radius);
 
-                    // Apačią patikriname pagal tai, kokia pozicija (Jeigu krentame stipriai, nesaugome kojų nuo sienų apatinių puslapių)
                     Vector3 p2 = transform.position + controller.center - Vector3.up * (controller.height / 2f - radius - controller.stepOffset);
 
-                    // Tikriname per kliūtis (Išskyrus monetas ar pan.), ar galime skristi/pasilikti norimoje pusėje
                     if (!Physics.CapsuleCast(p1, p2, radius, moveDirection, out _, tileSize, ~0, QueryTriggerInteraction.Ignore))
                     {
                         targetPosXZ += (moveDirection * tileSize);
@@ -107,7 +96,6 @@ public class PlayerTileMovement : MonoBehaviour
             }
         }
 
-        // --- SISTEMOS ŠIRDIS (MAGNETAS PRIE CENTRO) ---
         Vector3 expectedXZMovement = Vector3.zero;
         if (Vector3.Distance(currentPosXZ, targetPosXZ) > 0.001f)
         {
@@ -120,10 +108,8 @@ public class PlayerTileMovement : MonoBehaviour
 
         Vector3 positionBeforeMove = transform.position;
 
-        // Vykdome galutinį judesį variklyje
         controller.Move(finalMovement);
 
-        // --- ANTI-STUCK PRIE SIENŲ ---
         if (!isAtTileCenter)
         {
             Vector3 newPosXZ = new Vector3(transform.position.x, 0, transform.position.z);
@@ -131,7 +117,6 @@ public class PlayerTileMovement : MonoBehaviour
 
             if (expectedXZMovement.magnitude > 0.01f && actualDistanceMovedXZ < 0.005f)
             {
-                // Jei visgi kliudėme aukšto bloko sieną ore ar ant žemės – atšaukti šuolio traukimą į kitą laukelį
                 targetPosXZ = newPosXZ;
             }
         }
