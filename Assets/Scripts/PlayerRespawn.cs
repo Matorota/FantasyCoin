@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -6,7 +6,23 @@ using UnityEngine.InputSystem;
 
 public class PlayerRespawn : MonoBehaviour
 {
+    [Header("Fall Settings")]
+    [Tooltip("The Y position the player must fall below to die.")]
     public float threshold = -3f;
+
+    [Header("UI Elements")]
+    [Tooltip("Drag your FallLose pop-up panel here")]
+    public GameObject fallLoseUI;
+
+    private bool hasFallen = false;
+
+    void Start()
+    {
+        if (fallLoseUI != null)
+        {
+            fallLoseUI.SetActive(false);
+        }
+    }
 
     void Update()
     {
@@ -20,7 +36,6 @@ public class PlayerRespawn : MonoBehaviour
             if (Keyboard.current.escapeKey.wasPressedThisFrame)
             {
                 Time.timeScale = 1f;
-
                 SceneManager.LoadScene(1);
             }
         }
@@ -28,9 +43,21 @@ public class PlayerRespawn : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (transform.position.y < threshold)
+        if (!hasFallen && transform.position.y < threshold)
         {
-            ResetScene();
+            PlayerFell();
+        }
+    }
+
+    private void PlayerFell()
+    {
+        hasFallen = true;
+
+        if (fallLoseUI != null)
+        {
+            fallLoseUI.SetActive(true);
+
+            Time.timeScale = 0f;
         }
     }
 
