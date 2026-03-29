@@ -8,7 +8,7 @@ You can switch between the two movement systems in the Unity Editor by selecting
  - Non tile movement system
 
 ## How to Play
-- Collect every coin to win the level.
+- Collect every coin to win the game.
 - If the countdown timer hits zero, you lose.
 - If you fall off the map, you die.
 
