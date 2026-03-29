@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.InputSystem;
 
@@ -36,7 +34,7 @@ public class PlayerRespawn : MonoBehaviour
             if (Keyboard.current.escapeKey.wasPressedThisFrame)
             {
                 Time.timeScale = 1f;
-                SceneManager.LoadScene(1);
+                SceneManager.LoadScene("MainMeniu");
             }
         }
     }
@@ -56,7 +54,6 @@ public class PlayerRespawn : MonoBehaviour
         if (fallLoseUI != null)
         {
             fallLoseUI.SetActive(true);
-
             Time.timeScale = 0f;
         }
     }
@@ -64,7 +61,6 @@ public class PlayerRespawn : MonoBehaviour
     private void ResetScene()
     {
         Time.timeScale = 1f;
-
         Scene currentScene = SceneManager.GetActiveScene();
         SceneManager.LoadScene(currentScene.buildIndex);
     }
