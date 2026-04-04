@@ -21,7 +21,6 @@ public class MainMeniuManager : MonoBehaviour
 
     public void QuitGame()
     {
-        // Explicitly stating UnityEngine bypasses any confusing namespace errors!
         UnityEngine.Application.Quit();
     }
 }
