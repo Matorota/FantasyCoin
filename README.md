@@ -19,6 +19,6 @@ You can switch between the two movement systems in the Unity Editor by selecting
 - **Esc:** Return to the Main Menu
 
 
-#@ Comment: 
+## Comment: 
 Toward the end of development, I noticed an issue with the colliders and object positioning. I tried multiple approaches to fix it, but a bug remained where objects wouldn't fall off as intended. As a workaround, I added invisible collider walls and manually adjusted the positioning of few props and walls to contain the problem.
 That is why some areas may appear slightly uneven.
